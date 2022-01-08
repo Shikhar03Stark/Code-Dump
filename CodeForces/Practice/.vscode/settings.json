@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.cu": "cuda",
+        "*.mustache": "html",
+        "iostream": "cpp",
+        "ostream": "cpp"
+    }
+}
