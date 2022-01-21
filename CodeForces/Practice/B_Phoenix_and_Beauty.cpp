@@ -1,63 +1,45 @@
+// Author: Harshit Vishwakarma (Shikhar03Stark)
 #include <bits/stdc++.h>
 #define FASTIO ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define nl '\n'
 #define ll long long int
 #define ull unsigned long long int
-#define dev(x) cerr << #x << x << endl
+#define dev(x) cerr << #x << " " << x << endl
 using namespace std;
 
+void solve(){
+    int n, k;
+    cin >> n >> k;
+    set<int> S;
+    for(int i = 0; i<n; i++){
+        int data;
+        cin >> data;
+        S.insert(data);
+    }
+    if(S.size()>k){
+        cout << -1 << nl;
+        return;
+    }
+    vector<int> arr(S.begin(), S.end());
+    while(arr.size()<k){
+        arr.push_back(arr[0]);
+    }
+    int sz = arr.size();
+    cout << n*sz << nl;
+    for(int i = 0; i<n; i++){
+        for(int j = 0; j<sz; j++){
+            cout << arr[j] << " ";
+        }
+    }
+    cout << nl;
+    return;
+}
+
 int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        int n, k;
-        cin >> n >> k;
-        vector<int> arr(n);
-        set<int> S;
-        map<int,int> h;
-        for(int i = 0; i<n; i++){
-            cin >> arr[i];
-            //S.insert(arr[i]);
-            h[arr[i]] = 1;
-        }
-        if(h.size() > k){
-            cout << -1 << endl;
-            continue;
-        }
-        int idx = 0;
-        vector<int> ans;
-
-        while(ans.size()<h.size()){
-            if(h[arr[idx]] > 1){
-                for(int i = 1; i<n && ans.size()<h.size(); i++){
-                    if(h[i] == 1){
-                        ans.push_back(i);
-                        h[i] = 2;
-                    }
-                }
-            }
-            else{
-                ans.push_back(arr[idx]);
-                h[arr[idx++]] = 2;
-            }
-        }
-        int prev = 0;
-        while(idx<n){
-            if(ans[prev] == arr[idx]){
-                ans.push_back(ans[prev]);
-                idx++;
-                prev++;
-            }
-            else{
-                ans.push_back(ans[prev]);
-                prev++;
-            }
-        }
-        cout << ans.size() << endl;
-        for(auto& e: ans){
-            cout << e << " ";
-        }
-        cout << endl;
-
+    int T=1;
+    cin>>T;
+    while(T--){
+        solve();
     }
     return 0;
 }
