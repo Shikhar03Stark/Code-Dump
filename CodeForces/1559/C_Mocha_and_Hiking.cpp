@@ -51,6 +51,7 @@ void solve(){
     else{
         cout << -1 << nl;
     }
+    
     return;
 }
 
