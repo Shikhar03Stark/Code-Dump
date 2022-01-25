@@ -15,12 +15,34 @@ void solve(){
         cin >> e;
     }
     sort(arr.begin(), arr.end());
-    vector<int> ans(n+1);
-    for(int i = 0; i<n && arr[i]==0; i++){
-        if(arr[i]==0){
-            ans[0]++;
-        }
+    unordered_map<int,int> h;
+    for(int i = 0; i<n; i++){
+        h[arr[i]]++;
     }
+    vector<int> mex(n+1);
+    int zeros = lower_bound(arr.begin(), arr.end(), 1) - arr.begin();
+    mex[0] = zeros;
+    int excess = 0;
+    for(int i = 1; i<=n; i++){
+        if(mex[i-1] == -1){
+            mex[i] = -1;
+        }
+        else{
+            int lb = lower_bound(arr.begin(), arr.end(), i) - arr.begin();
+            if(lb >= i){
+                mex[i] = h[i];
+                h[i+1] += h[i] + lb-i;
+            }
+            else{
+                mex[i] = -1;
+            }
+        }
+        
+    }
+    for(auto& e: mex){
+        cout << e << " ";
+    }
+    cout << nl;
     return;
 }
 
