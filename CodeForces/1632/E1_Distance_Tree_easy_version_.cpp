@@ -60,7 +60,7 @@ void solve(){
     lone.push_back(1);
 
     for(int x = 1; x<=n; x++){
-        int ans = 2*n+1;
+        int ans = 2*n;
         for(auto& e: lone){
             gp[1].push_back({e, x});
             gp[e].push_back({1, x});
