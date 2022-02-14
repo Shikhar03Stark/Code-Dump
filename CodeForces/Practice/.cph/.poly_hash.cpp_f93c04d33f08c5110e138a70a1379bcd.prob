@@ -1,0 +1,1 @@
+{"name":"Local: poly_hash","url":"/home/shikhar/dev/competitiveP/CodeForces/Practice/poly_hash.cpp","tests":[{"id":1644829286697,"input":"9\nabccde\nabcde\nuiaaa\naaaa\naaaa\naaaiu\nabcde\nipeta\npelta","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/shikhar/dev/competitiveP/CodeForces/Practice/poly_hash.cpp","group":"local","local":true}
