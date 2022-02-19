@@ -25,11 +25,20 @@ bool possible(vector<char> &seq, map<char,int> &cnt, int k, int nt){
 
 bool verify(string s, string t, vector<char> &seq){
     string tt = "";
-    while(t.size()>0){
+    int idx = 0;
+    while(t.size()>0 && idx<seq.size()){
         tt += s;
         //erase all seq[i]
+        string ss;
+        for(int i = 0; i<s.size(); i++){
+            if(s[i] != seq[idx]){
+                ss.push_back(s[i]);
+            }
+        }
+        s = ss;
+        idx++;
     }
-    return false;
+    return (tt==t);
 }
 
 void solve(){
