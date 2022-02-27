@@ -7,35 +7,37 @@
 #define dev(x) cerr << #x << " " << x << endl
 using namespace std;
 
+const int mod = 1e9+7;
+
+ll modpow(ll b, ll a){
+    if(a == 0) return 1LL;
+    if(a == 1) return b;
+    ll h = modpow(b, a/2);
+    h = (h*h) % mod;
+    if(a%2){
+        return (b*h)%mod;
+    }
+    else{
+        return h;
+    }
+}
+
+ll modinv(ll n){
+    return modpow(n, mod-2);
+}
+
 void pre(){
     
     return;
 }
 
 void solve(){
-    ll n;
-    cin >> n;
-    vector<ll> arr(n);
-    map<ll,ll> h;
-    for(auto& e: arr){
-        cin >> e;
-        h[e]++;
-    }
-    vector<ll> seq;
-    for(auto& p: h){
-        seq.push_back(p.second);
-    }
-    int cnt = 0;
-    for(int i = 0; i<h.size(); i++){
-        cout << h.size() << " ";
-        cnt++;
-    }
-    int p = h.size();
-    while(cnt<n){
-        cout << (++p) << " ";
-        cnt++;
-    }
-    cout << nl;
+    ll n, m;
+    cin >> n >> m;
+    ll ans = modpow(2, m);
+    ans = (mod + ans - 1) % mod;
+    ans = modpow(ans, n);
+    cout << ans << nl;
     return;
 }
 
@@ -43,7 +45,7 @@ int main(){
     FASTIO
     pre();
     int T=1;
-    cin>>T;
+    //cin>>T;
     while(T--){
         solve();
     }

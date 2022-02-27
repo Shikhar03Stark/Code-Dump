@@ -13,29 +13,20 @@ void pre(){
 }
 
 void solve(){
-    ll n;
-    cin >> n;
+    ll n, k;
+    cin >> n >> k;
     vector<ll> arr(n);
-    map<ll,ll> h;
     for(auto& e: arr){
         cin >> e;
-        h[e]++;
     }
-    vector<ll> seq;
-    for(auto& p: h){
-        seq.push_back(p.second);
+    ll ans = n*(n-1) - k*(arr[n-1]|arr[n-2]);
+    for(ll i = 0; i<n; i++){
+        for(ll j = max(0LL,n-2*k-1); j<n; j++){
+            if (i!=j)
+                ans = max(ans, (i+1)*(j+1) - k*(arr[i]|arr[j]));
+        }
     }
-    int cnt = 0;
-    for(int i = 0; i<h.size(); i++){
-        cout << h.size() << " ";
-        cnt++;
-    }
-    int p = h.size();
-    while(cnt<n){
-        cout << (++p) << " ";
-        cnt++;
-    }
-    cout << nl;
+    cout << ans << nl;
     return;
 }
 

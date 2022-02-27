@@ -7,35 +7,36 @@
 #define dev(x) cerr << #x << " " << x << endl
 using namespace std;
 
+vector<int> primes;
+const int N = 1e6;
+vector<bool> p(N+1, true);
+int sz;
+
 void pre(){
-    
+    p[0] = p[1] = false;
+    for(int i = 2; i*i<=N; i++){
+        if(p[i]){
+            for(int j = i*i; j<N; j*= i){
+                p[i] = false;
+            }
+        }
+    }
+    for(int i = 2; i<N; i++){
+        primes.push_back(i);
+    }
+    sz = primes.size();
+    for(int i = 0; i<sz; i++){
+        if(n%primes[i] != 0){
+            
+        }
+    }
     return;
 }
 
 void solve(){
     ll n;
     cin >> n;
-    vector<ll> arr(n);
-    map<ll,ll> h;
-    for(auto& e: arr){
-        cin >> e;
-        h[e]++;
-    }
-    vector<ll> seq;
-    for(auto& p: h){
-        seq.push_back(p.second);
-    }
-    int cnt = 0;
-    for(int i = 0; i<h.size(); i++){
-        cout << h.size() << " ";
-        cnt++;
-    }
-    int p = h.size();
-    while(cnt<n){
-        cout << (++p) << " ";
-        cnt++;
-    }
-    cout << nl;
+
     return;
 }
 

@@ -13,29 +13,29 @@ void pre(){
 }
 
 void solve(){
-    ll n;
+    int n;
     cin >> n;
-    vector<ll> arr(n);
-    map<ll,ll> h;
+    vector<int> arr(n);
     for(auto& e: arr){
         cin >> e;
-        h[e]++;
     }
-    vector<ll> seq;
-    for(auto& p: h){
-        seq.push_back(p.second);
+    vector<int> R(n), L(n);
+    for(int i = 0; i<n; i++){
+        int r = 0, l = 0;
+        for(int j = i+1; j<n && arr[j]<=arr[j-1]; j++){
+            r++;
+        }
+        for(int j = i-1; j>=0 && arr[j]<=arr[j+1]; j--){
+            l++;
+        }
+        R[i] = r;
+        L[i] = l;
     }
-    int cnt = 0;
-    for(int i = 0; i<h.size(); i++){
-        cout << h.size() << " ";
-        cnt++;
+    int ans = 0;
+    for(int i = 0; i<n; i++){
+        ans = max(L[i]+R[i]+1, ans);
     }
-    int p = h.size();
-    while(cnt<n){
-        cout << (++p) << " ";
-        cnt++;
-    }
-    cout << nl;
+    cout << ans << nl;
     return;
 }
 
@@ -43,7 +43,7 @@ int main(){
     FASTIO
     pre();
     int T=1;
-    cin>>T;
+    //cin>>T;
     while(T--){
         solve();
     }

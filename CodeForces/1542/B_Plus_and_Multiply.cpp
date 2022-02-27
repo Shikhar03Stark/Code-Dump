@@ -13,29 +13,25 @@ void pre(){
 }
 
 void solve(){
-    ll n;
-    cin >> n;
-    vector<ll> arr(n);
-    map<ll,ll> h;
-    for(auto& e: arr){
-        cin >> e;
-        h[e]++;
+    ll n, a, b;
+    cin >> n >> a >> b;
+    if(a == 1){
+        if((n-1)%b == 0){
+            cout << "Yes" << nl;
+            return;
+        }
+        else{
+            cout << "No" << nl;
+            return;
+        }
     }
-    vector<ll> seq;
-    for(auto& p: h){
-        seq.push_back(p.second);
+    for(ll x = 1; x<=n; x *= a){
+        if((n-x)%b == 0){
+            cout << "Yes" << nl;
+            return;
+        }
     }
-    int cnt = 0;
-    for(int i = 0; i<h.size(); i++){
-        cout << h.size() << " ";
-        cnt++;
-    }
-    int p = h.size();
-    while(cnt<n){
-        cout << (++p) << " ";
-        cnt++;
-    }
-    cout << nl;
+    cout << "No" << nl;
     return;
 }
 
