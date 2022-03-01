@@ -1,0 +1,1 @@
+{"name":"Local: file","url":"/home/shikhar/dev/competitiveP/CodeForces/Practice/file.cpp","tests":[{"id":1646135077122,"input":"3 2\n2 1 5 4 3","output":"4"},{"id":1646135399576,"input":"1 2\n3 1 2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/shikhar/dev/competitiveP/CodeForces/Practice/file.cpp","group":"local","local":true}
