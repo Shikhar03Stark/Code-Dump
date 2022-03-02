@@ -12,48 +12,63 @@ void pre(){
     return;
 }
 
+void showAll(vector<int> arr, map<int,int> &idx, vector<int> &half){
+    int n = arr.size();
+    cerr << "ARR: ";
+    for(int i = 1; i<n; i++){
+        cerr << arr[i] << " ";
+    }
+    cerr << nl;
+    cerr << "IDX: ";
+    for(int i = 1; i<n; i++){
+        cerr << idx[arr[i]] << " ";
+    }
+    cerr << nl;
+    cerr << "HAF: ";
+    for(int i = 1; i<n; i++){
+        cerr << half[arr[i]] << " ";
+    }
+    cerr << nl;
+}
+
 void solve(){
-    int n, m;
-    cin >> n >> m;
-    vector<int> arr(n+m+1);
-    for(int i = 1; i<=n+m; i++){
-        cin >> arr[i];
-    }
-    map<int,int> idx;
-    for(int i = 1; i<m+n+1; i++){
-        idx[arr[i]] = i;
-    }
-    vector<int> half(n+m+1, 0);
-    for(int i = n+1; i<n+m+1; i++){
-        cerr << i << " ";
-        half[arr[i]] = 1;
-    }
-    cerr << nl;
-    for(int i = 1; i<n+m+1; i++){
-        cerr << half[arr[i]] << ":" << arr[i] << " ";
-    }
-    cerr << nl;
-    int ans = 0;
-    for(int i = n+m; i>0; i--){
-        if(i != arr[i]){
-            if((half[arr[i]]^half[i]) == 1){
+    int n,m;
+    cin>>n>>m;
+    vector<int> v(n+m+1);
+    for(int i=1;i<=n+m;i++)
+        cin>>v[i];
+    vector<int> p;
+    p=v;
+    sort(p.begin(),p.end());
+    int ans=0;
+    for(int i=1;i<=n+m;i++){
+        if(v[i]==p[i])
+            continue;
+        if(i<=n){
+            int x=v[v[i]];
+            if(v[i]>n){
+                swap(v[i],v[v[i]]);
                 ans++;
-                int i2 = idx[i];
-                swap(half[arr[i]], half[i]);
-                swap(arr[idx[i]], arr[idx[i]]);
-                idx[arr[i]] = i2;
-                idx[i] = i;
             }
             else{
-                ans += 3;
-                int i2 = idx[i];
-                swap(arr[idx[i]], arr[idx[i]]);
-                idx[arr[i]] = i2;
-                idx[i] = i;
+                if(x<=n){
+                    ans+=3;
+                    swap(v[i],v[v[i]]);
+                }
+                else{
+                    swap(v[i],v[x]);
+                    swap(v[v[i]],v[x]);
+                    ans+=2;
+                }
             }
         }
+        else{
+            int x=v[v[i]];
+            swap(v[i],v[v[i]]);
+            ans+=3;
+        }
     }
-    cout << ans << endl;
+    cout<<ans<<endl;
     return;
 }
 
