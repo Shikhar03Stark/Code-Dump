@@ -43,6 +43,14 @@ vector<ll> pf(ll n){
     return ans;
 }
 
+ll pos(ll p, ll q, ll d){
+    ll x = p;
+    while(x%q==0){
+        x /= d;
+    }
+    return x;
+}
+
 void solve(){
     ll p, q;
     cin >> p >> q;
@@ -53,17 +61,7 @@ void solve(){
         auto arr = pf(q);
         ll ans = 1;
         for(auto& e: arr){
-            for(int i = 1; i<64; i++){
-                if((p%((ll)pow(e,i))) == 0){
-                    ll x = p/pow(e, i);
-                    if(p%x==0 && q%x!=0){
-                        ans = max(ans, x);
-                    }
-                }
-                else{
-                    break;
-                }
-            }
+            ans = max(ans, pos(p, q, e));
         }
         cout << ans << nl;
     }
