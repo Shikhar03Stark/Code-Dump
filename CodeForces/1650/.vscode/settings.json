@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.cu": "cuda",
+        "*.mustache": "html",
+        "tuple": "cpp"
+    }
+}

@@ -12,40 +12,44 @@ void pre(){
     return;
 }
 
-ll wbfs(map<int, vector<pair<int,int>>> &gp, int start, int dest){
-    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+ll wbfs(map<ll, vector<pair<ll,ll>>> &gp, int start, int dest){
+    priority_queue<pair<ll,ll>, vector<pair<ll,ll>>, greater<pair<ll,ll>>> pq;
     pq.push({0, start});
-    map<int, int> dist;
+    map<int, ll> dist;
     for(auto& e: gp){
-        dist[e.first] = 1e8;
+        dist[e.first] = 1e14;
     }
     dist[start] = 0;
     while(!pq.empty()){
-        auto p = pq.top(); pq.pop();
-        for(auto& e: gp[p.second]){
+        ll v = pq.top().second;
+        ll d_v = pq.top().first;
+        pq.pop();
+        for(auto& e: gp[v]){
             int next = e.first;
             int w = e.second;
-            if(dist[next] > dist[p.second] + w){
-                dist[next] = dist[p.second] + w;
+            if(dist[next] > dist[v] + w){
+                dist[next] = dist[v] + w;
                 pq.push({dist[next], next});
             }
         }
     }
 
-    return dist[dest]==1e8?-1:dist[dest];
+    return dist[dest]==1e14?-1:dist[dest];
 }
 
 void solve(){
     int n;
+    cin >> n;
     vector<int> vtx(n);
     for(int i = 0; i<n; i++){
         cin >> vtx[i];
     }
     int edges;
     cin >> edges;
-    map<int, vector<pair<int,int>>> gp;
+    map<ll, vector<pair<ll,ll>>> gp;
     for(int i = 0; i<edges; i++){
-        int u, v, w;
+        ll u, v, w;
+        cin >> u >> v >> w;
         gp[u].push_back({v,w});
     }
     int start, end;
