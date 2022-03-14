@@ -50,77 +50,23 @@ void solve(){
     for(int i = 0; i<n; i++){
         cin >> grid[i];
     }
-    // vector<string> g2(n);
-    // for(int i = 0; i<n; i++){
-    //     for(int j = 0; j<m; j++){
-    //         g2[i][j] = (grid[i][j]=='1'?'0':'1');
-    //     }
-    // }
-    vector<vector<pair<int,int>>> dp(n+1, vector<pair<int,int>>(m+1, {0,0}));
-    vector<vector<pair<int,int>>> dp2(n+1, vector<pair<int,int>>(m+1, {0,0}));
-    // vector<vector<pair<int,int>>> dp2(n+1, vector<pair<int,int>>(m+1, {0,0}));
-    for(int i = 0; i<n; i++){
-        for(int j = 0; j<m; j++){
-            // if(g2[i][j] == '1'){
-            //     dp2[i+1][j+1] = {dp2[i][j+1].first + 1, dp2[i+1][j].second+1};
-            // }
-            if(grid[i][j] == '1'){
-                dp[i+1][j+1] = {dp[i][j+1].first + 1, dp[i+1][j].second+1};
+
+    bool pos = true;
+    for(int i = 0; i<n-1; i++){
+        for(int j = 0; j<m-1; j++){
+            int cnt = 0;
+            cnt += grid[i][j] - '0';
+            cnt += grid[i+1][j] - '0';
+            cnt += grid[i][j+1] - '0';
+            cnt += grid[i+1][j+1] - '0';
+            if(cnt == 3){
+                cout << "NO" << nl;
+                return;
             }
         }
     }
 
-    for(int i = n-1; i>=0; i--){
-        for(int j = m-1; j>=0; j--){
-            if(grid[i][j] == '1'){
-                dp2[i][j] = {dp2[i][j+1].first+1, dp2[i+1][j].second + 1};
-            }
-        }
-    }
-    vector<vector<bool>> vis(n, vector<bool>(m, false));
-    vector<vector<bool>> vis2(n, vector<bool>(m, false));
-
-    // vector<vector<bool>> vis2(n, vector<bool>(m, false));
-    // for(int i = 0; i<n; i++){
-    //     for(int j = 0; j<m; j++){
-    //         cerr << "(" << dp2[i][j].first << "," << dp2[i][j].second << ") ";
-    //     }
-    //     cerr << nl;
-    // }
-    for(int i = 0; i<n; i++){
-        for(int j = 0; j<m; j++){
-            if(grid[i][j] == '1'){
-                if(!fill(grid, dp, i, j, vis) ){
-                    cout << "NO" << nl;
-                    return;
-                }
-            }
-        }
-    }
-
-    for(int i = n-1; i>=0; i--){
-        for(int j = m-1; j>=0; j--){
-            if(grid[i][j] == '1'){
-                if(!fill2(grid, dp2, i, j, vis2)){
-                    cout << "NO" << nl;
-                    return;
-                }
-            }
-        }
-    }
-    // for(int i = n-1; i>=0; i--){
-    //     for(int j = m-1; j>=0; j--){
-    //         if(g2[i][j] == '1'){
-    //             if(!fill(g2, dp2, i, j, vis2)){
-    //                 cout << "NO" << nl;
-    //                 return;
-    //             }
-    //         }
-    //     }
-    // }
     cout << "YES" << nl;
-
-
 
     return;
 }
