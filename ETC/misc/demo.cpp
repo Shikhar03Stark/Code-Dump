@@ -12,49 +12,36 @@ void pre(){
     return;
 }
 
-ll wbfs(map<ll, vector<pair<ll,ll>>> &gp, int start, int dest){
-    priority_queue<pair<ll,ll>, vector<pair<ll,ll>>, greater<pair<ll,ll>>> pq;
-    pq.push({0, start});
-    map<int, ll> dist;
-    for(auto& e: gp){
-        dist[e.first] = 1e14;
+int maxlen(int zero, int one, int any){
+    int d = one - zero;
+    if(d<0){
+        int r = min(any, zero-one);
+        any -= r;
+        one += r;
     }
-    dist[start] = 0;
-    while(!pq.empty()){
-        ll v = pq.top().second;
-        ll d_v = pq.top().first;
-        pq.pop();
-        for(auto& e: gp[v]){
-            int next = e.first;
-            int w = e.second;
-            if(dist[next] > dist[v] + w){
-                dist[next] = dist[v] + w;
-                pq.push({dist[next], next});
-            }
-        }
+    else if(d>0){
+        int r = min(any, one-zero);
+        any -= r;
+        zero += r;
     }
-
-    return dist[dest]==1e14?-1:dist[dest];
+    return min(zero, one) + any/2;
 }
 
 void solve(){
     int n;
     cin >> n;
-    vector<int> vtx(n);
+    string s;
+    cin >> s;
+    // int n = s.size();
+    int zero = 0, one = 0, any = 0;
+    int ans = 0;
     for(int i = 0; i<n; i++){
-        cin >> vtx[i];
+        if(s[i] == '0') zero++;
+        if(s[i] == '1') one++;
+        if(s[i] == '?') any++;
+        ans = max(ans, 2*maxlen(zero, one, any));
     }
-    int edges;
-    cin >> edges;
-    map<ll, vector<pair<ll,ll>>> gp;
-    for(int i = 0; i<edges; i++){
-        ll u, v, w;
-        cin >> u >> v >> w;
-        gp[u].push_back({v,w});
-    }
-    int start, end;
-    cin >> start >> end;
-    cout << wbfs(gp, start, end) << endl;
+    cout << ans << nl;
     return;
 }
 
@@ -62,7 +49,7 @@ int main(){
     FASTIO
     pre();
     int T=1;
-    //cin>>T;
+    cin>>T;
     while(T--){
         solve();
     }
