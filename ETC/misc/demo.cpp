@@ -31,8 +31,51 @@ void closestNumbers(vector<int> numbers){
 
 }
 
+int deleteProducts(vector<int> ids, int m){
+    int n = ids.size();
+    map<int,int> h;
+    for(int i = 0; i<n; i++){
+        h[ids[i]]++;
+    }
+    vector<pair<int,int>> p;
+    for(auto& e: h){
+        p.push_back({e.second, e.first});
+    }
+    sort(p.begin(), p.end());
+    for(int i = 0; i<p.size(); i++){
+        cout << p[i].first << " " << p[i].second << nl;
+        int val = p[i].first;
+        if(val > m){
+            return p.size()-i;
+        }
+        else{
+            m -= val;
+        }
+    }
+    return 0;
+}
+
+vector<int> solve(int X, vector<int> arr, vector<int> query_values){
+    int n = arr.size();
+    map<int,vector<int>> h;
+    for(int i = 0; i<n; i++){
+        h[arr[i]].push_back(i+1);
+    }
+    vector<int> ans;
+    for(auto& q: query_values){
+        if(q>n){
+            ans.push_back(-1);
+        }
+        else{
+            ans.push_back(h[X][q-1]);
+        }
+    }
+    return ans;
+}
+
 void solve(){
-    closestNumbers({6, 2, 4, 10});
+    // cout << deleteProducts({1,1,1,2,3,2}, 2) << nl;
+    cout << 
     return;
 }
 
