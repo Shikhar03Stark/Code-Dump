@@ -13,30 +13,25 @@ void pre(){
 }
 
 void solve(){
-    int n;
-    cin >> n;
-    vector<int> arr(n);
-    int maxi = 0;
+    ll n, s;
+    cin >> n >> s;
+    vector<ll> arr(n);
     for(auto& e: arr){
         cin >> e;
-        maxi = max(maxi, e);
     }
-    vector<int> mod(3, 0);
-    int optimal = 0;
-    for(int i = 0; i<n; i++){
-        mod[(maxi-arr[i])%3]++;
-        int x = (maxi-arr[i]);
-        optimal += (x%3==0)?(2*x):(2*x+1);
+    sort(arr.begin(), arr.end());
+    ll ans = 0;
+    if(arr[n/2]<=s){
+        for(int i = n/2; i<n; i++){
+            ans += max(s-arr[i], 0LL);
+        }
     }
-    if(mod[0] >= 2){
-        //optimal days
-        cout << optimal <<nl;
-        return;
+    else{
+        for(int i = n/2; i>=0; i--){
+            ans += max(arr[i]-s, 0LL);
+        }
     }
-    if(mod[1] == 0 && mod[2] == 0){
-        cout << optimal << nl;
-        return;
-    }
+    cout << ans << nl;
     return;
 }
 
@@ -44,7 +39,7 @@ int main(){
     FASTIO
     pre();
     int T=1;
-    cin>>T;
+    //cin>>T;
     while(T--){
         solve();
     }
