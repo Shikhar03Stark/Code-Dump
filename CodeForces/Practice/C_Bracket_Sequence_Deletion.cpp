@@ -119,6 +119,15 @@
 #define dev(x) cerr << #x << " " << x << endl
 using namespace std;
 
+bool ispalin(string &s, int start, int end){
+    int i = 0;
+    while(start+i < end-i){
+        if(s[start+i] != s[end-i]) return false;
+        i++;
+    }
+    return true;
+}
+
 void pre(){
     
     return;
