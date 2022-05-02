@@ -12,30 +12,19 @@ void pre(){
     return;
 }
 
-/* OUTPUT
-regression
-e 2
-g 1
-i 1
-n 1
-o 1
-r 2
-s 2
-*/
-
-//sentence -> get the word which has maximum repeated char
-// aaabb zzzzzzzz zzxy
-
 void solve(){
-    string word;
-    cin >> word;
-    map<char, int> h;
-    for(auto &c: word){
-        h[c]++;
+    ll n, g;
+    cin >> n >> g;
+    vector<ll> arr(g);
+    for(auto& e: arr){
+        cin >> e;
     }
-    for(auto& p: h){
-        cout << p.first << " " << p.second << endl;
+    sort(arr.begin(), arr.end());
+    ll sum = 0;
+    for(int i = 0; i<n; i++){
+        sum += arr[i];
     }
+    cout << sum << nl;
     return;
 }
 
@@ -43,7 +32,7 @@ int main(){
     FASTIO
     pre();
     int T=1;
-    //cin>>T;
+    cin>>T;
     while(T--){
         solve();
     }
