@@ -138,36 +138,15 @@ void solve(){
     cin >> n;
     string s;
     cin >> s;
-    int open = 0;
-    int i = 0, j = 0;
+    int i = 0;
     int ops = 0;
-    int lastidx = 0;
-    while(i+1<n){
-        if(s[i] == '('){
-            ops++;
-            i += 2;
-            lastidx = i;
-        }
-        else{
-            bool f = false;
-            for(int j = i+1; j<n; j++){
-                if(s[j] == s[i]){
-                    lastidx = j+1;
-                    ops++;
-                    i = j+1;
-                    f = true;
-                    break;
-                }
-            }
-            if(!f) i++;
-        }
+    while(i<n){
+        int j = i;
+        int open = 0;
+        
+
     }
-    if(lastidx>=n){
-        cout << ops << " " << 0 << nl;
-    }
-    else{
-        cout << ops << " " << n-lastidx << nl;
-    }
+    
     // // cerr << nl;
     // for(int j = i; j<n; j++){
     //     if(s[j] == '('){
