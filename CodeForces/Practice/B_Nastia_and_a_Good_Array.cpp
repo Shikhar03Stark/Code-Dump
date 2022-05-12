@@ -13,20 +13,29 @@ void pre(){
 }
 
 void solve(){
-    ll n, l, r;
-    cin >> n >> l >> r;
-    vector<ll> arr(n);
+    int n;
+    cin >> n;
+    vector<int> arr(n);
     for(auto& e: arr){
         cin >> e;
     }
-    sort(arr.begin(), arr.end());
-    ll ans = 0;
+    int mini = 0;
     for(int i = 0; i<n; i++){
-        auto lb = lower_bound(arr.begin(), arr.begin()+i, l-arr[i]) - arr.begin();
-        auto ub = upper_bound(arr.begin(), arr.begin()+i, r-arr[i]) - arr.begin();
-        ans += ub-lb;
+        if(arr[mini] > arr[i]){
+            mini = i;
+        }
     }
-    cout << ans << nl;
+    cout << n-1 << nl;
+    for(int i = 0; i<n; i++){
+        if(i != mini){
+            if(i%2 == mini%2){
+                cout << i+1 << " " << mini+1 << " " <<  arr[mini] << " " << arr[mini] << nl;
+            }
+            else{
+                cout << i+1 << " " << mini+1 << " " <<  arr[mini]+1 << " " << arr[mini] << nl;
+            }
+        }
+    }
     return;
 }
 

@@ -13,19 +13,29 @@ void pre(){
 }
 
 void solve(){
-    ll n, l, r;
-    cin >> n >> l >> r;
-    vector<ll> arr(n);
-    for(auto& e: arr){
-        cin >> e;
+    int n;
+    cin >> n;
+    vector<vector<int>> point(2, vector<int>(n));
+    vector<vector<int>> prefix(2, vector<int>(n+1));
+    for(auto& row: point){
+        for(auto& e: row){
+            cin >> e;
+        }
     }
-    sort(arr.begin(), arr.end());
-    ll ans = 0;
+
     for(int i = 0; i<n; i++){
-        auto lb = lower_bound(arr.begin(), arr.begin()+i, l-arr[i]) - arr.begin();
-        auto ub = upper_bound(arr.begin(), arr.begin()+i, r-arr[i]) - arr.begin();
-        ans += ub-lb;
+        prefix[0][i+1] = prefix[0][i] + point[0][i];
+        prefix[1][i+1] = prefix[1][i] + point[1][i];
     }
+
+    int tot = prefix[0][n] + prefix[1][n];
+
+    int ans = tot;
+    int res = 0;
+    for(int i = 0; i<n; i++){
+        ans = min(ans, max(prefix[1][i], prefix[0][n] - prefix[0][i+1]));
+    }
+
     cout << ans << nl;
     return;
 }

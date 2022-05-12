@@ -1,75 +1,48 @@
+// Author: Harshit Vishwakarma (Shikhar03Stark)
 #include <bits/stdc++.h>
 #define FASTIO ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define nl '\n'
 #define ll long long int
 #define ull unsigned long long int
-#define dev(x) cerr << #x << x << endl
+#define dev(x) cerr << #x << " " << x << endl
 using namespace std;
 
+void pre(){
+    
+    return;
+}
+
+struct Point{
+    double x, y;
+};
+
+void solve(){
+    double W,H,x1,x2,y1,y2,w,h,ans;
+    cin>>W>>H;
+    cin>>x1>>y1>>x2>>y2;
+    cin>>w>>h;
+    double h2=H-y2, h1=y1, w1=x1, w2=W-x2;
+    if(h+abs(y2-y1)>H && w+abs(x2-x1)>W) cout<<"-1"<<endl;
+    else if(h+abs(y2-y1)<=H && w+abs(x2-x1)>W){
+        cout<<fixed<< setprecision(10)<< max(min(h-h1,h-h2),0.0)<<endl;
+    }
+    else if(h+abs(y2-y1)>H && w+abs(x2-x1)<=W){
+        cout<<fixed<< setprecision(10)<<max(min(w-w1,w-w2),0.0)<<endl;
+    }
+    else{
+        cout<<fixed<< setprecision(10)<< min(max(min(h-h1,h-h2),0.0),max(min(w-w1,w-w2),0.0))<<endl;
+    }
+
+    return;
+}
+
 int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        ll W, H, x1, y1, x2, y2, w, h;
-        cin >> W >> H;
-        cin >> x1 >> y1 >> x2 >> y2;
-        cin >> w >> h;
-        double ans = INT_MAX;
-        ll dx=0, dy=0;
-        if(x1>w)
-            dx = x1-w;
-        else
-            dx = 0;
-        if(H-h<y2)
-            dy = y2-H+h;
-        else
-            dy = 0;
-        if(dx == 0 || dy==0)
-            ans = 0;
-        if(dx!=0 && dy!=0 && x2+dx<=W && y1-dy>=0)
-            ans = min(ans, sqrt(dx*dx+dy*dy));
-        if(x1<w)
-            dx = w-x1;
-        else
-            dx=0;
-        if(y1<h)
-            dy=h-y1;
-        else
-            dy=0;
-        if(dx == 0 || dy==0)
-            ans = 0;
-        if(dx!=0 && dy != 0 && x2+dx <= W && y2+dy<=H)
-            ans = min(ans, sqrt(dx*dx+dy*dy));
-        if(x2>H-h)
-            dx=x2-H+h;
-        else
-            dx=0;
-        if(y1<h)
-            dy = h-y1;
-        else
-            dy=0;
-        if(dx == 0 || dy==0)
-            ans = 0;
-        if(dx!=0 && dy != 0 && x1-dx >=0 && y2+dy<=H)
-            ans = min(ans, sqrt(dx*dx+dy*dy));
-        if(x2>W-w)
-            dx=x2-W+w;
-        else
-            dx=0;
-        if(y2>H-h)
-            dy=y2-H+h;
-        else
-            dy=0;
-        if(dx == 0 || dy==0)
-            ans = 0;
-        if(dx!=0 && dy != 0 && x1-dx >=0 && y1-dy>=0)
-            ans = min(ans, sqrt(dx*dx+dy*dy));
-        
-        if(ans == INT_MAX){
-            cout << -1 << endl;
-        }
-        else{
-            cout << setprecision(11) << ans << endl;
-        }
+    FASTIO
+    pre();
+    int T=1;
+    cin>>T;
+    while(T--){
+        solve();
     }
     return 0;
 }
