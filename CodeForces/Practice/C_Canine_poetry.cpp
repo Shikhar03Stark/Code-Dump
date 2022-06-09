@@ -42,21 +42,25 @@ int remove3palin(string &s, int idx){
 void solve(){
     string s;
     cin >> s;
-    set<int> change;
     int n = s.size();
-    ll ans = 0;
-    for(int i = 0; i<n-1; i++){
-        int c = remove3palin(s, i);
-        ans += c;
+    int ans = 0;
+    vector<bool> mark(n, false);
+    for(int i = 1; i<n; i++){
+        if(i>1){
+            if(s[i] == s[i-2] && !mark[i-2]) mark[i] = true;
+            if(s[i] == s[i-1] && !mark[i-1]) mark[i] = true;
+        }
+        else{
+            if(s[i] == s[i-1]) mark[i] = true;
+        }
     }
-    cerr << s << nl;
-    // for(int i = 0; i<n-2; i++){
-    //     if(remove3palin(s, i)){
-    //         change.insert(i+1);
-    //     }
+    // for(auto  e: mark){
+    //     cerr << e;
     // }
-    cerr << s << nl << nl;
-    cout << ans << nl;
+    // cerr << nl;
+    int sum = accumulate(mark.begin(), mark.end(), 0);
+    // cerr << s << nl;
+    cout << sum << nl;
     return;
 }
 
