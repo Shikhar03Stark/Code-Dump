@@ -15,12 +15,30 @@ void pre(){
 void solve(){
     int n;
     cin >> n;
-    if(n&1){
-        
+    vector<int> arr(n);
+    for(auto& e: arr){
+        cin >> e;
     }
-    else{
-        cout << n/2 << " " << n/2 << nl;
+    if(n == 1) {
+        cout << -1 << nl;
+        return;
     }
+    vector<int> A(n);
+    for(int i = 0; i<n; i++){
+        A[i] = i+1;
+    }
+    for(int i = 0; i<n-1; i++){
+        if(arr[i] == A[i]){
+            swap(A[i], A[i+1]);
+        }
+    }
+    if(arr[n-1] == A[n-1]){
+        swap(A[n-1], A[n-2]);
+    }
+    for(auto& e: A){
+        cout << e << " ";
+    }
+    cout << nl;
     return;
 }
 
