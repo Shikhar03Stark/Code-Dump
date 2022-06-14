@@ -1,55 +1,37 @@
+// Author: Harshit Vishwakarma (Shikhar03Stark)
 #include <bits/stdc++.h>
 #define FASTIO ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define nl '\n'
 #define ll long long int
 #define ull unsigned long long int
-#define dev(x) cerr << #x << x << endl
+#define dev(x) cerr << #x << " " << x << endl
 using namespace std;
 
-vector<ll> els;
+void pre(){
+    
+    return;
+}
 
-bool solve(int x, int mask){
-    ll res = x;
-    int idx = 8;
-    while(res>0 && idx>=0){
-        if((mask&(1<<idx))>0){
-            res = res%els[idx];
-        }
-        idx--;
+void solve(){
+    ll n;
+    cin >> n;
+    ll r = n%11;
+    if(n/11 >= 10*r){
+        cout << "YES" << nl;
     }
-
-    if(res==0)
-        return true;
-    return false;
+    else{
+        cout << "NO" << nl;
+    }
+    return;
 }
 
 int main(){
-    int t;
-    cin>>t;
-    ll ans = 1;
-    while(ans<=1e10){
-        ans *= 10;
-        ans++;
-        els.push_back(ans);
-        cerr << ans << " ";
-    }
-    cerr << endl;
-
-    while(t--){
-        ll x;
-        cin >> x;
-        int idx = 8;
-        
-        bool pos = false;
-        for(int i = 1; i<(1<<8); i++){
-            if(solve(x, i)){
-                cerr << i << endl;
-                pos = true;
-                break;
-            }
-        }
-
-        cout << (pos?"YES":"NO") << endl;
-
+    FASTIO
+    pre();
+    int T=1;
+    cin>>T;
+    while(T--){
+        solve();
     }
     return 0;
 }
